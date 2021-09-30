@@ -7,15 +7,17 @@ $breakpoint-hd: 100rem;
 $breakpoint-mob: 26.25rem;
 
 $color-reset: #ffffff;
-$color: #1976d2;
-$color--light: #63a4ff;
-$color--dark: #004ba0;
-$color-alt: #304ffe;
-$color-alt--light: #7a7cff;
-$color-alt--dark: #0026ca;
+$color: #282828;
+$color--light: #505050;
+$color--dark: #0D090F;
+$color--dark--accent: #968FAC;
 
-$text-color: #000000;
-$text-color--dark: #ffffff;
+$color-alt: #009e4d;
+$color-alt--light: #52d07a;
+$color-alt--dark: #006e22;
+
+$color-on--light: #000000;
+$color-on--dark: #ffffff;
 
 $fontSize: 16px;
 $paraSize: 1.5rem;
@@ -25,3 +27,10 @@ $paraSize-lg: 1.8rem;
 $spacer: 0.5rem;
 $lineHeight: 1.8rem;
 $letterSpacing: 0.05rem;
+
+$graphColor--1: #7F85FF;
+$graphColor--2: #2D36A7;
+$graphColor--3: #1882F4;
+$graphColor--4: #11134E;
+$graphColor--5: #009e4d;
+$graphColor--6: #52d07a;
