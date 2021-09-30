@@ -1,0 +1,31 @@
+@-ms-viewport {
+    width: device-width;
+}
+
+html,
+body,
+section,
+div {
+    position: relative;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: $color-reset;
+    font-size: $fontSize;
+    color: $text-color;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    font-size: $paraSize;
+}
