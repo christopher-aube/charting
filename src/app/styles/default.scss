@@ -18,12 +18,13 @@ body {
 }
 
 html {
-    background-color: $color-reset;
     font-size: $fontSize;
-    color: $text-color;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: none;
+    font-family: 'Raleway', sans-serif;
+    background-color: $color--dark;
+    color: $color-on--dark;
 }
 
 body {

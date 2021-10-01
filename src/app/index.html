@@ -4,12 +4,107 @@
     <head>
         <base href="/" target="_top">
         <title>Charting | Dashboard</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
     </head>
 
-    <body>
-        <div>Hello World</div>
+    <body id="app">
+        
+        <header id="app--bar" class="toolbar">
+            <div class="row middle-xs">
+
+                <div class="app--icon"></div>
+
+                <div class="col-xs">
+                    <div class="row between-xs middle-xs">
+
+                        <div class="col-xs">
+                            <div>Dashboard</div>
+                        </div>
+                
+                        <div class="col-xs">
+                            <div class="row end-xs middle-xs">
+
+                                <div class="action--icon">
+                                    <span class="material-icons">search</span>
+                                </div>
+                                
+                                <div class="action--icon">
+                                    <span class="material-icons">error_outline</span>
+                                </div>
+
+                                <div class="action--icon">
+                                    <span class="material-icons">notifications</span>
+                                </div>
+
+                                <div class="avatar">
+                                    
+                                    <div class="avatar--img">
+                                        <span>CA</span>
+                                    </div>
+
+                                    <div class="avatar--action">
+                                        <span class="material-icons">expand_more</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+        <main id="app--container" class="container">
+
+            <section class="row">
+
+                <div class="col-xs-8">
+                    <div class="box--left">
+
+                        <div id="chart--graph" class="row">
+                            <div class="col-xs-12">
+                                <div class="panel--left">
+                                    <div class="graph">Graph goes here</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="chart--table" class="row">
+                            <div class="col-xs-12">
+                                <div class="panel--left">
+                                    <div class="table">Table goes here</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="box--right">
+
+                        <div id="chart-controls" class="row">
+                            <div class="col-xs-12">
+                                <div class="panel--right">
+                                    <div class="controls">Controls go here</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
     </body>
 
 </html>

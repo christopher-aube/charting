@@ -1,0 +1,12 @@
+.toolbar {
+    background-color: $color;
+    padding: 0.5rem;
+}
+
+.app--icon {
+    background-image: url(assets/logo.png);
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin: 0.25rem 0.5rem;
+}

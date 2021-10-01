@@ -1,0 +1,12 @@
+.action {
+
+    &--icon {
+        padding: 0.5rem;
+        margin: 0 0.5rem;
+        border-radius: 100%;
+
+        & > .material-icons {
+            line-height: 2rem;
+        }
+    }
+}

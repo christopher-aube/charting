@@ -1,0 +1,13 @@
+.box {
+    margin: 0.5rem;
+
+    &--left {
+        @extend .box;
+        margin-right: 0;
+    }
+
+    &--right {
+        @extend .box;
+        margin-left: 0;
+    }
+}

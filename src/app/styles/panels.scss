@@ -1,0 +1,16 @@
+.panel {
+    background-color: $color;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+
+    &--left {
+        @extend .panel;
+        margin-right: 0.5rem;
+    }
+
+    &--right {
+        @extend .panel;
+        margin-left: 0.5rem;
+    }
+}

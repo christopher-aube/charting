@@ -1,10 +1,10 @@
 import "../styles/index.scss";
 
-function component() {
+function component(msg: string): HTMLDivElement {
     const element = document.createElement('div');
 
-    element.innerHTML = `I'm back!!`;
+    element.innerHTML = msg;
     return element;
 }
 
-document.body.appendChild(component());
+// document.body.appendChild(component('Testing'));

@@ -4,7 +4,6 @@
 */
 
 @use "sass:meta";
-@import './vars';
 
 $gutter-width: 1rem;
 $gutter-compensation: (($gutter-width * 0.5) * -1);
@@ -232,7 +231,7 @@ $outer-margin: 2rem;
     $hd: $breakpoint-hd
 );
 
-.content {
+.container {
     margin: 0 auto;
     width: calc(100% - 1rem);
 }
@@ -240,7 +239,7 @@ $outer-margin: 2rem;
 @mixin wrapper-system($args...) {
     @each $name, $value in meta.keywords($args) {
         @media only screen and (min-width: $value) {
-            .content {
+            .container {
                 width: ($value - 1);
             }
         }
@@ -252,5 +251,6 @@ $outer-margin: 2rem;
     $md: $breakpoint-md,
     $lg: $breakpoint-lg,
     $xl: $breakpoint-xl,
-    $hd: $breakpoint-hd
+    $hd: $breakpoint-hd,
+    $uhd: $breakpoint-uhd
 );
