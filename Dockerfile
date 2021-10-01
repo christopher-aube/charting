@@ -6,4 +6,4 @@ COPY ./ ./
 
 RUN npm install --only=prod
 
-CMD ["node", "dist/server/index.js"]
+CMD ["npm", "start"]

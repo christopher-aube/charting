@@ -6,9 +6,12 @@
   "scripts": {
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc && webpack",
+    "build:app": "webpack",
+    "build:server": "tsc",
+    "start": "node dist/server/index.js",
     "serve": "docker-compose up --build -d",
-    "stop": "docker-compose down",
-    "destroy": "docker rmi charting_server"
+    "seed": "docker exec charting_server_1 node dist/server/db/seed.js",
+    "stop": "docker-compose down && docker-compose rm"
   },
   "repository": {
     "type": "git",
@@ -21,10 +24,13 @@
   },
   "homepage": "https://github.com/christopher-aube/charting#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.95.11",
+    "pg": "^8.7.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/pg": "^8.6.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.3.0",
