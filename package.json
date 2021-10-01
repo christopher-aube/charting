@@ -10,7 +10,7 @@
     "build:server": "tsc",
     "start": "node dist/server/index.js",
     "serve": "docker-compose up --build -d",
-    "seed": "docker exec charting_server_1 node dist/server/db/seed.js",
+    "seed": "docker exec charting_server_1 node dist/server/db/seed/index.js",
     "stop": "docker-compose down && docker-compose rm"
   },
   "repository": {

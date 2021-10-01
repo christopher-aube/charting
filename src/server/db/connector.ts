@@ -1,4 +1,4 @@
-import { Knex, knex } from 'knex';
+import { Knex, knex } from 'knex'
 
 const config: Knex.Config = {
     client: 'postgres',
@@ -10,4 +10,4 @@ const config: Knex.Config = {
     }
 };
 
-export default knex(config);
+export default knex(config)
