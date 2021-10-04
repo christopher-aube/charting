@@ -2,6 +2,9 @@ import { knex, Knex } from 'knex'
 import config from '../config'
 import { drop, uuid, foreignKey, insert } from '../utls/table'
 import { tableName as manufacturer } from './manufacturer'
+import { random as randomNum } from '../../utls/nums'
+import { status } from '../utls/constants'
+import * as medications from './data/medications'
 
 export const tableName = 'medications'
 
@@ -9,9 +12,9 @@ function createTable(db: Knex) {
     return db.schema.withSchema(config.schema).createTable(tableName, (table) => {
         uuid(db, table)
         table.string('name')
-        table.string('code')
+        uuid(db, table, 'code')
         table.string('status')
-        table.uuid('manufacturer_id').unsigned()
+        table.uuid('manufacturer_id')
         foreignKey(table, { colName: 'manufacturer_id', tableName: manufacturer })
         table.integer('amount')
         table.integer('amount_numerator')
@@ -23,29 +26,42 @@ function createTable(db: Knex) {
 }
 
 function generateData(db: Knex, manufacturerIds: any) {
+    const manuMax = manufacturerIds.length - 1;
+    const medsMin = 25
+    const medsMax = 50
+    const medsItems = randomNum(medsMax, medsMin)
+    const namesMax = medications.names.length - 1;
 
-    function randomItem() {
+    let i = 0
+    let data: Array<medications.Type> = []
+
+    function randomItem(): medications.Type {
+        const manuRandIndex = randomNum(manuMax)
+        const nameRandIndex = randomNum(namesMax)
+        
         let item = {
-            name: 'test-1',
-            code: 'xxx-xx-xxx',
-            status: 'active',
-            manufacturer_id: manufacturerIds[0],
+            name: medications.names[nameRandIndex],
+            status: status.active,
+            manufacturer_id: manufacturerIds[manuRandIndex],
             amount: 0,
-            amount_numerator: 2,
-            amount_denominator: 5,
+            amount_numerator: randomNum(10),
+            amount_denominator: 0,
             strength: 0,
-            strength_numerator: 25,
-            strength_denominator: 60
+            strength_numerator: randomNum(75),
+            strength_denominator: 0
         }
 
+        item.amount_denominator = randomNum(20, item.amount_numerator)
         item.amount = item.amount_numerator / item.amount_denominator
+        item.strength_denominator = randomNum(250, item.strength_numerator)
         item.strength = item.strength_numerator / item.strength_denominator
         return item
     }
 
-    let data = [
-        randomItem()
-    ]
+    while (i < medsItems) {
+        data.push(randomItem())
+        i++
+    }
     
     console.log(`generating data for ${tableName}`)
     return insert(db, tableName, data)
@@ -65,4 +81,7 @@ export function seed(db: Knex, manufacturerIds: any) {
     });
 }
 
-export default { seed, tableName }
+export default {
+    seed,
+    tableName
+}

@@ -6,12 +6,23 @@ export function drop(db: Knex, tableName: string) {
     return db.schema.dropTableIfExists(tableName);
 }
 
-export function uuid(db: Knex, table: Knex.TableBuilder): void {
-    table.uuid("id")
-		.primary()
-		.notNullable()
-		.unique()
-		.defaultTo(db.raw('uuid_generate_v4()'))
+export function uuid(db: Knex, table: Knex.TableBuilder, col = 'id'): void {
+
+    switch (col) {
+        case 'id':
+            table.uuid(col)
+                .primary()
+                .notNullable()
+                .unique()
+                .defaultTo(db.raw('uuid_generate_v4()'))
+            break;
+        default:
+            table.uuid(col)
+                .notNullable()
+                .unique()
+                .defaultTo(db.raw('uuid_generate_v4()'))
+            break;
+    }
 }
 
 export function foreignKey(

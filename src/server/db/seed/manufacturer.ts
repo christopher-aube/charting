@@ -1,6 +1,7 @@
 import { knex, Knex } from 'knex'
 import config from '../config'
 import { drop, uuid, insert } from '../utls/table'
+import * as manufacturers from './data/manufacturers'
 
 export const tableName = 'manufacturer'
 
@@ -13,18 +14,7 @@ function createTable(db: Knex) {
 }
 
 function generateData(db: Knex) {
-    let data = [
-        { name: 'Amgen' },
-        { name: 'Sanofi' },
-        { name: 'Bristol-Myers Squibb' },
-        { name: 'Takeda' },
-        { name: 'AbbVie' },
-        { name: 'Novartis' },
-        { name: 'Merck' },
-        { name: 'Johnson & Johnson' },
-        { name: 'Pfizer' },
-        { name: 'Roche' }
-    ]
+    let data: Array<manufacturers.Type> = manufacturers.list
     console.log(`generating data for ${tableName}`)
     return insert(db, tableName, data)
 }
