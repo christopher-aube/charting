@@ -1,12 +1,21 @@
 import { knex, Knex } from 'knex'
-import { asyncForEach as forEach } from '../../utls/list';
+import { asyncForEach as forEach } from '../../utls/list'
+import * as base from '../seed/schema/types'
+import config from '../config'
 
-export function drop(db: Knex, tableName: string) {
+export function drop(
+    db: Knex,
+    tableName: string
+) {
     console.log(`dropping table ${tableName}`)
     return db.schema.dropTableIfExists(tableName);
 }
 
-export function uuid(db: Knex, table: Knex.TableBuilder, col = 'id'): void {
+export function uuid(
+    db: Knex,
+    table: Knex.TableBuilder,
+    col = 'id'
+): void {
 
     switch (col) {
         case 'id':
@@ -36,9 +45,54 @@ export function foreignKey(
     table.foreign(opts.colName).references(opts.tableName + '.id')
 }
 
-export function insert(db: Knex, tableName: string, data: Array<{}>) {
+export function create(
+    db: Knex,
+    tableName: string,
+    schema: Array<base.Type>
+) {
+    return db
+        .schema
+        .withSchema(config.schema)
+        .createTable(tableName, (table) => {
+            const schemaLn = schema.length
 
-    function addItemToTable(item: object) {
+            let i: number = 0
+
+            while (i < schemaLn) {
+
+                switch (schema[i].column.type) {
+                    case 'uuid':
+                        uuid(db, table, schema[i].column.name)
+                        break;
+                    case 'string':
+                        table.string(schema[i].column.name)
+                        break;
+                    case 'integer':
+                        table.integer(schema[i].column.name)
+                        break;
+                    case 'foreign':
+                        table.uuid(schema[i].column.name)
+                        foreignKey(table, {
+                            colName: schema[i].column.name,
+                            tableName: schema[i].column.table
+                        })
+                        break;
+                }
+
+                i++
+            }
+        })
+}
+
+export function insert(
+    db: Knex,
+    tableName: string,
+    data: Array<{}>
+) {
+
+    function addItemToTable(
+        item: object
+    ) {
         console.log(`inserting item into ${tableName} \n`, JSON.stringify(item, null, 4))
         return db(tableName).returning('id').insert(item)
     }
@@ -46,4 +100,10 @@ export function insert(db: Knex, tableName: string, data: Array<{}>) {
     return forEach(data, addItemToTable)
 }
 
-export default { drop, uuid, foreignKey, insert }
+export default {
+    drop,
+    uuid,
+    foreignKey,
+    insert,
+    create
+}
