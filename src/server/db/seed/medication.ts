@@ -1,11 +1,9 @@
 import { knex, Knex } from 'knex'
 import { random as randomNum } from '../../utls/nums'
 import { status } from '../utls/constants'
-import { schema } from './schema/medication'
+import { schema, name as tableName } from './schema/medication'
 import * as utls from '../utls/table'
 import * as medications from './data/medications'
-
-export const tableName = 'medications'
 
 function generateData(db: Knex, manufacturerIds: any) {
     const manuMax = manufacturerIds.length - 1;
@@ -24,12 +22,12 @@ function generateData(db: Knex, manufacturerIds: any) {
         let item = {
             name: medications.names[nameRandIndex],
             status: status.active,
-            manufacturer_id: manufacturerIds[manuRandIndex],
+            manufacturer_id: manufacturerIds[manuRandIndex][0],
             amount: 0,
-            amount_numerator: randomNum(10),
+            amount_numerator: randomNum(10, 1),
             amount_denominator: 0,
             strength: 0,
-            strength_numerator: randomNum(75),
+            strength_numerator: randomNum(75, 1),
             strength_denominator: 0
         }
 
@@ -64,6 +62,5 @@ export function seed(db: Knex, manufacturerIds: any) {
 }
 
 export default {
-    seed,
-    tableName
+    seed
 }

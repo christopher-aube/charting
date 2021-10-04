@@ -1,7 +1,23 @@
 import * as base from './types'
-import { tableName as manufacturer } from '../manufacturer'
+import { name as manuTable } from './manufacturer'
 
-const schema: Array<base.Type> = [
+export interface Design {
+    id: string,
+    name: string,
+    code: string,
+    status: string,
+    manufacturer_id: string,
+    amount: number,
+    amount_numerator: number,
+    amount_denominator: number,
+    strength: number,
+    strength_numerator: number,
+    strength_denominator: number
+}
+
+export const name = 'medications'
+
+export const schema: Array<base.Type> = [
     {
         column: {
             name: 'id',
@@ -30,13 +46,13 @@ const schema: Array<base.Type> = [
         column: {
             name: 'manufacturer_id',
             type: 'foreign',
-            table: manufacturer
+            table: manuTable
         }
     },
     {
         column: {
             name: 'amount',
-            type: 'integer'
+            type: 'decimal'
         }
     },
     {
@@ -54,7 +70,7 @@ const schema: Array<base.Type> = [
     {
         column: {
             name: 'strength',
-            type: 'integer'
+            type: 'decimal'
         }
     },
     {
@@ -71,6 +87,7 @@ const schema: Array<base.Type> = [
     }
 ]
 
-export {
-    schema
+export default {
+    schema,
+    name
 }

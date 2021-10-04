@@ -70,6 +70,9 @@ export function create(
                     case 'integer':
                         table.integer(schema[i].column.name)
                         break;
+                    case 'decimal':
+                        table.decimal(schema[i].column.name)
+                        break;
                     case 'foreign':
                         table.uuid(schema[i].column.name)
                         foreignKey(table, {

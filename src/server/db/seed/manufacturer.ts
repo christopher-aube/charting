@@ -1,9 +1,7 @@
 import { knex, Knex } from 'knex'
-import { schema } from './schema/manufacturer'
+import { schema, name as tableName } from './schema/manufacturer'
 import * as utls from '../utls/table'
 import * as manufacturers from './data/manufacturers'
-
-export const tableName = 'manufacturer'
 
 function generateData(db: Knex) {
     let data: Array<manufacturers.Type> = manufacturers.list
@@ -25,4 +23,6 @@ export function seed(db: Knex) {
     });
 }
 
-export default { seed, tableName }
+export default {
+    seed
+}

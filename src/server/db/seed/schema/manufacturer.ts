@@ -1,6 +1,13 @@
 import * as base from './types'
 
-const schema: Array<base.Type> = [
+export interface Design {
+    id: string
+    name: string
+}
+
+export const name: string = 'manufacturers'
+
+export const schema: Array<base.Type> = [
     {
         column: {
             name: 'id',
@@ -15,6 +22,7 @@ const schema: Array<base.Type> = [
     }
 ]
 
-export {
-    schema
+export default {
+    schema,
+    name
 }
