@@ -62,7 +62,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js'],
+        alias: {
+            handlebars: 'handlebars/dist/handlebars.min.js'
+        }
     },
     output: {
         filename: '[name].[contenthash].js',

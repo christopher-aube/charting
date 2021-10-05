@@ -24,7 +24,10 @@
   },
   "homepage": "https://github.com/christopher-aube/charting#readme",
   "dependencies": {
+    "axios": "^0.22.0",
     "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "highcharts": "^9.2.2",
     "knex": "^0.95.11",
     "pg": "^8.7.1"
   },
