@@ -11,12 +11,28 @@ function getMeds() {
         }
 
         components.table.create(
-            '#chart--table .table',
+            '.chart--table--content',
             data,
             [
                 {
                     label: 'Name',
-                    pointer: 'name'
+                    pointer: 'name',
+                    classes: 'col-xs-4 start-xs'
+                },
+                {
+                    label: 'Manufacturer',
+                    pointer: 'manufacturer_name',
+                    classes: 'col-xs-4 start-xs'
+                },
+                {
+                    label: 'Amount',
+                    pointer: 'amount',
+                    classes: 'col-xs-2 center-xs'
+                },
+                {
+                    label: 'Strength',
+                    pointer: 'strength',
+                    classes: 'col-xs-2 center-xs'
                 }
             ]
         )

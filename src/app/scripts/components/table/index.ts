@@ -13,18 +13,18 @@ Handlebars.registerHelper('tableColumnValue', (item, column):string => {
 
 const template:string =
 `
-<thead class="table--header">
-    <tr class="table--header--row">
+<thead class="chart--table--header">
+    <tr class="chart--table--row">
     {{#each columns}}
-        <th>{{{label}}}</th>
+        <th class="chart--table--cell {{{classes}}}">{{{label}}}</th>
     {{/each}}
     </tr>
 </thead>
-<tbody class="table--body>
+<tbody class="chart--table--body">
     {{#each items as | item |}}
-        <tr class="table--body--row">
+        <tr class="chart--table--row">
             {{#each ../columns as | column |}}
-                <td>{{tableColumnValue item column}}</td>
+                <td class="chart--table--cell {{{column.classes}}}">{{tableColumnValue item column}}</td>
             {{/each}}
         </tr>
     {{/each}}
@@ -36,7 +36,8 @@ export function create(
     data: any,
     columns: Array<{
         label: string,
-        pointer: string
+        pointer: string,
+        classes ?: string
     }>
 ) {
     const elem:HTMLElement = document.querySelector(selector)
