@@ -70,6 +70,10 @@
 
         &--content {
             height: 792px;
+        }
+
+        &--list {
+            max-height: calc(100% - 4rem);
             overflow: auto;
         }
     }

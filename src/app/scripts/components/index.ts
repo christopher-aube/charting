@@ -1,7 +1,9 @@
 import * as table from './table/index'
-import * as charting from './chart/index'
+import charting from './chart/index'
+import button from './button/index'
 
 export default {
+    button,
     table,
     charting
 }

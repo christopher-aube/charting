@@ -1,0 +1,44 @@
+button {
+    user-select: none;
+    border-radius: 0;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    text-decoration: none;
+    letter-spacing: .05rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.button {
+    min-width: 6rem;
+    background-color: $color-accent;
+    color: $color-on--light;
+    border: 2px solid transparent;
+
+    &:focus {
+        border-color: $color-reset;
+    }
+
+    &::after {
+        content: '';
+        background-color: $color-accent--light;
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        top: var(--mouse-y);
+        left: var(--mouse-x);
+        transform-style: flat;
+        transform: translate3d(-50%,-50%,0);
+        background: rgba(white,.1);
+        border-radius: 100%;
+        transition: width .3s ease, height .3s ease;
+    }
+
+    &:active::after {
+        height: 250%;
+        width: 250%;
+    }
+}

@@ -14,6 +14,10 @@ function isDataReady() {
         data.manufacturers.length > 0 &&
         data.medications.length > 0
     )
+
+    if (data.ready) {
+        components.charting.controls.init()
+    }
 }
 
 function getManus() {
@@ -74,12 +78,12 @@ function getMeds() {
             ]
         )
 
-        components.charting.create(
+        components.charting.graph.create(
             '.chart--graph--content',
             results,
             {
                 series: {
-                    name: 'Med Amounts'
+                    name: 'Medication Amount'
                 },
                 categories: {
                     field: 'name'
@@ -99,6 +103,7 @@ function getMeds() {
 }
 
 ;(() => {
+    components.button()
     getMeds()
     getManus()
 })()
