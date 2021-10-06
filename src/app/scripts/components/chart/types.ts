@@ -1,13 +1,24 @@
+import Highcharts from 'highcharts'
 import { JsonFilter } from '../../types';
 
-export type Series = {
-    name: string,
-    data: Array<any>
+export type ResultPoint = {
+    [key: string]: string | number | null
 }
 
+export type ChartSeries =
+    Highcharts.SeriesAreaOptions |
+    Highcharts.SeriesArearangeOptions |
+    Highcharts.SeriesAreasplineOptions |
+    Highcharts.SeriesBarOptions |
+    Highcharts.SeriesBubbleOptions |
+    Highcharts.SeriesColumnOptions |
+    Highcharts.SeriesLineOptions |
+    Highcharts.SeriesPieOptions |
+    Highcharts.SeriesScatterOptions
+
 export type Result = {
-    series: Array<Series>,
-    catergories: Array<string>
+    series: Array<ChartSeries>,
+    categories: Array<string>
 }
 
 export type DataPoint = {
@@ -15,16 +26,12 @@ export type DataPoint = {
     field: string
 }
 
-export type ResultPoint = {
-    [key: string]: string | number | null
-}
-
 export type BuildOpts = {
     series: {
         list: Array<string>,
         filter ?: JsonFilter
     },
-    catergories: {
+    categories: {
         list: Array<string>,
         filter: JsonFilter
     },
@@ -36,7 +43,7 @@ export type Config = {
         field ?: string,
         name ?: string
     },
-    catergories: {
+    categories: {
         field: string,
         values ?: Array<string>
     },

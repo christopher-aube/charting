@@ -81,7 +81,7 @@ function getMeds() {
                 series: {
                     name: 'Med Amounts'
                 },
-                catergories: {
+                categories: {
                     field: 'name'
                 },
                 points: [

@@ -1,14 +1,14 @@
 import { RawData } from '../../types';
-import { BuildOpts, Series, DataPoint, Result, Config, ResultPoint } from './types';
+import { BuildOpts, ChartSeries, DataPoint, Result, Config, ResultPoint } from './types';
 import jsonFilter from '../ults/json-filter'
 import jsonPointer from '../ults/json-pointer'
 
 function extractUniques(
     data: Array<RawData>,
     field: string
-): Array<any> {
+): Array<string> {
     let value: any
-    let entries: Array<any> = []
+    let entries: Array<string> = []
 
     data.forEach((entity) => {
         value = jsonPointer(entity, field)
@@ -34,14 +34,28 @@ function getPointValue(
         if (val === undefined) {
             res = null
         } else {
+            let check
+
+            if (typeof val === 'string') {
+                check = parseFloat(val)
+
+                if (!isNaN(check)) {
+                    val = check
+                }
+            }
             
             switch (typeof val) {
                 case 'string':
                     res = val
                     break;
                 case 'number':
-                    if (res === undefined) { res = val }
-                    if (typeof res === 'number') { res += val}
+
+                    if (res === undefined) {
+                        res = val
+                    } else if (typeof res === 'number') {
+                        res += val
+                    }
+
                     break;
             }
         }
@@ -53,8 +67,8 @@ function getPointValue(
 function buildSeries(
     opts: BuildOpts,
     data: Array<RawData>
-): Array<Series> {
-    let result: Array<Series> = []
+): Array<ChartSeries> {
+    let result: Array<ChartSeries> = []
     let seriesData: Array<any>
 
     function processData(
@@ -74,16 +88,16 @@ function buildSeries(
     function formatData(
         entities: Array<RawData>
     ): Array<ResultPoint> {
-        return opts.catergories.list.map((
+        return opts.categories.list.map((
             cat: string
             ) => {
-                opts.catergories.filter.value = cat
+                opts.categories.filter.value = cat
 
                 return processData(
                     jsonFilter.matchAll(
                         entities,
                         [
-                            opts.catergories.filter
+                            opts.categories.filter
                         ]
                     )
                 )
@@ -102,7 +116,8 @@ function buildSeries(
 
         result.push({
             name: name,
-            data: seriesData
+            data: seriesData,
+            type: undefined
         })
     });
 
@@ -113,21 +128,17 @@ export default (
     data: Array<RawData>,
     opts: Config
 ): Result => {
-    let results: Result = {
-            series: [],
-            catergories: []
-        }
-    let catergoriesList: Array<string>
+    let categoriesList: Array<string>
     let seriesList: Array<string>
     
-    // setting catergories build config
+    // setting categories build config
     if (
-        opts.catergories.hasOwnProperty('values') &&
-        Array.isArray(opts.catergories.values)
+        opts.categories.hasOwnProperty('values') &&
+        Array.isArray(opts.categories.values)
     ) {
-        catergoriesList = opts.catergories.values
+        categoriesList = opts.categories.values
     } else {
-        catergoriesList = extractUniques(data, opts.catergories.field)
+        categoriesList = extractUniques(data, opts.categories.field)
     }
 
     // setting series build config
@@ -144,10 +155,10 @@ export default (
     }
 
     let buildOpts: BuildOpts = {
-            catergories: {
-                list: catergoriesList,
+            categories: {
+                list: categoriesList,
                 filter: {
-                    field: opts.catergories.field,
+                    field: opts.categories.field,
                     op: 'EQ',
                     value: ''
                 }
@@ -166,7 +177,8 @@ export default (
         }
     }
 
-    results.series = buildSeries(buildOpts, data)
-    results.catergories = buildOpts.catergories.list
-    return results
+    return {
+        series: buildSeries(buildOpts, data),
+        categories: buildOpts.categories.list
+    }
 } 

@@ -1,6 +1,6 @@
 import * as Highcharts from 'highcharts';
 import { RawData } from '../../types';
-import { Config } from './types';
+import { Config, Result } from './types';
 import translator from './translator';
 
 export function create(
@@ -8,7 +8,10 @@ export function create(
     data: Array<RawData>,
     opts: Config,
 ): void {
-    let chartOpts = {
+    const charData: Result = translator(data, opts)
+    const chartElem: HTMLElement = document.querySelector(selector)
+
+    let chartOpts: Highcharts.Options = {
             colors: [
                 '#009e4d',
                 '#6059BD',
@@ -26,10 +29,29 @@ export function create(
             },
             chart: {
                 height: '330px',
-                width: '96%'
+                type: 'column',
+                renderTo: chartElem,
+                marginTop: 20,
+                backgroundColor: 'transparent'
+            },
+            series: charData.series,
+            xAxis: {
+                categories: charData.categories
+            },
+            title:{
+                text:'',
+                floating: true,
+                margin: 0,
+                y: 0
             }
         }
-    
-    const charData = translator(data, opts)
+
+    if (chartOpts.series.length === 1) {
+        chartOpts.legend = {
+            enabled: false
+        }
+    }
+
     console.log('chartData', charData)
+    let chart = new Highcharts.Chart(chartOpts)
 }
