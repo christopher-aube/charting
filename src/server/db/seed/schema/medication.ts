@@ -7,6 +7,7 @@ export interface Design {
     code: string,
     status: string,
     manufacturer_id: string,
+    manufacturer_name ?: string,
     amount: number,
     amount_numerator: number,
     amount_denominator: number,
