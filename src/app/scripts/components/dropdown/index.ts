@@ -101,7 +101,7 @@ export default (
         const item: HTMLElement = this as HTMLElement
         const itemIndex:number = parseInt(item.getAttribute('data-index'))
         let itemData = config.items[itemIndex]
-        let prevItem:HTMLElement = document.querySelector('.dropdown--item[data-index="'+selectedIndex+'"]')
+        let prevItem:HTMLElement = getDropElem('.dropdown--item[data-index="'+selectedIndex+'"]')
 
         if (prevItem) {
             prevItem.setAttribute('aria-selected', 'false')

@@ -1,6 +1,6 @@
 export const template =
 `
-<div class="control dropdown {{#if selectedItem}}selected{{/if}}" tabindex="0">
+<div class="control dropdown {{#if selectedItem}}selected{{/if}}">
     <button
         type="menu"
         class="dropdown--button"

@@ -25,6 +25,42 @@ export function init() {
             ]
         }
     )
+
+    dropdown(
+        selectors.axisX,
+        {
+            label: 'X Axis',
+            items: [
+                {
+                    label: 'Medication',
+                    value: 'name',
+                    selected: true
+                },
+                {
+                    label: 'Manufacture',
+                    value: 'manufacture_name'
+                }
+            ]
+        }
+    )
+
+    dropdown(
+        selectors.axisY,
+        {
+            label: 'Y Axis',
+            items: [
+                {
+                    label: 'Amount',
+                    value: 'amount',
+                    selected: true
+                },
+                {
+                    label: 'Strength',
+                    value: 'strength'
+                }
+            ]
+        }
+    )
 }
 
 export default {
