@@ -21,6 +21,18 @@ export function init() {
                 {
                     label: 'Bar',
                     value: 'bar'
+                },
+                {
+                    label: 'Line',
+                    value: 'line'
+                },
+                {
+                    label: 'Area',
+                    value: 'area'
+                },
+                {
+                    label: 'Pie',
+                    value: 'pie'
                 }
             ]
         }

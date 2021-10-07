@@ -1,6 +1,6 @@
 import * as Highcharts from 'highcharts';
 import { RawData, CustomEvent } from '../../types';
-import { Config, Result, ChartUpdated } from './types';
+import { Config, Result, ChartUpdated, CustomHighchartsOptions } from './types';
 import translator from './translator';
 
 export function create(
@@ -11,7 +11,7 @@ export function create(
     const chartElem: HTMLElement = document.querySelector(selector)
 
     let chartData: Result = translator(data, opts)
-    let chartOpts: Highcharts.Options = {
+    let chartOpts: CustomHighchartsOptions = {
             colors: [
                 '#009e4d',
                 '#6059BD',
@@ -60,13 +60,35 @@ export function create(
         const detail = ev.detail
 
         opts.categories.field = detail.axisX.value
-        opts.points = [{ point: 'y', field: detail.axisY.value }]
+
+        switch (detail.type.value) {
+            case 'pie':
+                opts.points = [
+                    { point: 'y', field: detail.axisY.value },
+                    { point: 'name', field: detail.axisX.value }
+                ]
+                break;
+            default:
+                opts.points = [{ point: 'y', field: detail.axisY.value }]
+                break;
+        }
+
         chartOpts.chart.type = detail.type.value
         chartData = translator(data, opts)
-        chartOpts.xAxis = {
-            categories: chartData.categories
-        }
         chartOpts.series = chartData.series
+
+        switch (detail.type.value) {
+            case 'pie':
+                chartOpts.series[0].colorByPoint = true
+                break;
+            default:
+                chartOpts.series[0].colorByPoint = false
+                chartOpts.xAxis = {
+                    categories: chartData.categories
+                }
+                break;
+        }
+
         chart.update(chartOpts)
     }
 

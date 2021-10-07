@@ -6,16 +6,48 @@ export type ResultPoint = {
     [key: string]: string | number | null
 }
 
+interface CustomSeriesAreaOptions extends Highcharts.SeriesAreaOptions {
+    colorByPoint ?: boolean
+}
+
+interface CustomSeriesArearangeOptions extends Highcharts.SeriesArearangeOptions {
+    colorByPoint ?: boolean
+}
+
+interface CustomSeriesAreasplineOptions extends Highcharts.SeriesAreasplineOptions {
+    colorByPoint ?: boolean
+}
+
+interface CustomSeriesBubbleOptions extends Highcharts.SeriesBubbleOptions {
+    colorByPoint ?: boolean
+}
+
+interface CustomSeriesLineOptions extends Highcharts.SeriesLineOptions {
+    colorByPoint ?: boolean
+}
+
+interface CustomSeriesPieOptions extends Highcharts.SeriesPieOptions {
+    colorByPoint ?: boolean
+}
+
+interface CustomSeriesScatterOptions extends Highcharts.SeriesScatterOptions {
+    colorByPoint ?: boolean
+}
+
 export type ChartSeries =
-    Highcharts.SeriesAreaOptions |
-    Highcharts.SeriesArearangeOptions |
-    Highcharts.SeriesAreasplineOptions |
+    CustomSeriesAreaOptions |
+    CustomSeriesArearangeOptions |
+    CustomSeriesAreasplineOptions |
     Highcharts.SeriesBarOptions |
-    Highcharts.SeriesBubbleOptions |
+    CustomSeriesBubbleOptions |
     Highcharts.SeriesColumnOptions |
-    Highcharts.SeriesLineOptions |
-    Highcharts.SeriesPieOptions |
-    Highcharts.SeriesScatterOptions
+    CustomSeriesLineOptions |
+    CustomSeriesPieOptions |
+    CustomSeriesScatterOptions
+
+export interface CustomHighchartsOptions extends Highcharts.Options {
+    series: Array<ChartSeries>
+}
 
 export type Result = {
     series: Array<ChartSeries>,
