@@ -1,5 +1,4 @@
-import { AppData } from "../../types"
-import render from '../ults/renderer'
+import dropdown from "../dropdown/index"
 
 export function init() {
     const selectors = {
@@ -8,13 +7,24 @@ export function init() {
             axisY: '#chart--control--axisY',
             update: '#chart--control-update'
         }
-    
-    let typeElem:HTMLElement = document.querySelector(selectors.chartType)
-    let xElem:HTMLElement = document.querySelector(selectors.axisX)
-    let yElem:HTMLElement = document.querySelector(selectors.axisY)
-    let update:HTMLButtonElement = document.querySelector(selectors.update)
 
-
+    dropdown(
+        selectors.chartType,
+        {
+            label: 'Chart Type',
+            items: [
+                {
+                    label: 'Column',
+                    value: 'column',
+                    selected: true
+                },
+                {
+                    label: 'Bar',
+                    value: 'bar'
+                }
+            ]
+        }
+    )
 }
 
 export default {
