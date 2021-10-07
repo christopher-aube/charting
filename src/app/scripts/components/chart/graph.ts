@@ -8,9 +8,9 @@ export function create(
     data: Array<RawData>,
     opts: Config,
 ): void {
-    const charData: Result = translator(data, opts)
     const chartElem: HTMLElement = document.querySelector(selector)
 
+    let chartData: Result = translator(data, opts)
     let chartOpts: Highcharts.Options = {
             colors: [
                 '#009e4d',
@@ -34,9 +34,9 @@ export function create(
                 marginTop: 20,
                 backgroundColor: 'transparent'
             },
-            series: charData.series,
+            series: chartData.series,
             xAxis: {
-                categories: charData.categories
+                categories: chartData.categories
             },
             title:{
                 text:'',
@@ -52,14 +52,22 @@ export function create(
         }
     }
 
-    console.log('chartData', charData)
     let chart = new Highcharts.Chart(chartOpts)
 
     function handlerChartUpdated(
         ev: CustomEvent<ChartUpdated>
     ) {
         const detail = ev.detail
-        console.log('updated', detail)
+
+        opts.categories.field = detail.axisX.value
+        opts.points = [{ point: 'y', field: detail.axisY.value }]
+        chartOpts.chart.type = detail.type.value
+        chartData = translator(data, opts)
+        chartOpts.xAxis = {
+            categories: chartData.categories
+        }
+        chartOpts.series = chartData.series
+        chart.update(chartOpts)
     }
 
     window.addEventListener('chart-updated', (handlerChartUpdated) as EventListener)
