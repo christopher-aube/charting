@@ -4,6 +4,9 @@ This app makes use of [Typescript](https://www.typescriptlang.org/), [SASS](http
 
 Although Node is apart of the Docker container you will need to have it installed to use the commands that instantiate and run the app.
 
+### Caveat
+To get Docker working on Windows 10 you will need to have Hyper-V installed and enabled, this requires Windows 10 Pro. You may also need to turn on virtualization in your BIOS settings. You can read more about the Windows install [here](https://docs.docker.com/desktop/windows/install/).
+
 ## Setup
 To get the app setup, run these commands in your terminal.
 
