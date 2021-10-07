@@ -1,6 +1,6 @@
 import * as Highcharts from 'highcharts';
-import { RawData } from '../../types';
-import { Config, Result } from './types';
+import { RawData, CustomEvent } from '../../types';
+import { Config, Result, ChartUpdated } from './types';
 import translator from './translator';
 
 export function create(
@@ -54,6 +54,15 @@ export function create(
 
     console.log('chartData', charData)
     let chart = new Highcharts.Chart(chartOpts)
+
+    function handlerChartUpdated(
+        ev: CustomEvent<ChartUpdated>
+    ) {
+        const detail = ev.detail
+        console.log('updated', detail)
+    }
+
+    window.addEventListener('chart-updated', (handlerChartUpdated) as EventListener)
 }
 
 export default {

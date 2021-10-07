@@ -1,5 +1,6 @@
 import Highcharts from 'highcharts'
 import { JsonFilter } from '../../types';
+import { DropdownItem } from '../dropdown/types'
 
 export type ResultPoint = {
     [key: string]: string | number | null
@@ -48,4 +49,10 @@ export type Config = {
         values ?: Array<string>
     },
     points: Array<DataPoint>
+}
+
+export type ChartUpdated = {
+    type: DropdownItem,
+    axisX: DropdownItem,
+    axisY: DropdownItem
 }

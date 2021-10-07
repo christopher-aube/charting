@@ -1,3 +1,5 @@
+import { ChartUpdated } from './types'
+import { DropdownConfig } from '../dropdown/types'
 import dropdown from "../dropdown/index"
 
 export function init() {
@@ -7,10 +9,8 @@ export function init() {
             axisY: '#chart--control--axisY',
             update: '#chart--control-update'
         }
-
-    dropdown(
-        selectors.chartType,
-        {
+    let updateBtn:HTMLElement = document.querySelector(selectors.update)
+    let typeConfig:DropdownConfig = {
             label: 'Chart Type',
             items: [
                 {
@@ -24,11 +24,7 @@ export function init() {
                 }
             ]
         }
-    )
-
-    dropdown(
-        selectors.axisX,
-        {
+    let axisXConfig:DropdownConfig = {
             label: 'X Axis',
             items: [
                 {
@@ -42,11 +38,7 @@ export function init() {
                 }
             ]
         }
-    )
-
-    dropdown(
-        selectors.axisY,
-        {
+    let axisYConfig:DropdownConfig = {
             label: 'Y Axis',
             items: [
                 {
@@ -60,7 +52,23 @@ export function init() {
                 }
             ]
         }
-    )
+
+    dropdown(selectors.chartType, typeConfig)
+    dropdown(selectors.axisX, axisXConfig)
+    dropdown(selectors.axisY, axisYConfig)
+
+    updateBtn.onclick = () => {
+        const event:CustomEvent = new CustomEvent<ChartUpdated>('chart-updated', {
+            bubbles: true,
+            detail: {
+                type: typeConfig.selectedItem,
+                axisX: axisXConfig.selectedItem,
+                axisY: axisYConfig.selectedItem
+            }
+        })
+        
+        window.dispatchEvent(event)
+    }
 }
 
 export default {
