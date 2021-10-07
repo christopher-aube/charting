@@ -1,0 +1,80 @@
+.dropdown {
+    $c: &;
+
+    &--button {
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        color: $color-reset;
+        border-bottom: 2px solid $color-reset;
+        padding: 1rem;
+        font-size: 1.5rem;
+        min-height: 4rem;
+
+        &::after {
+            content: "expand_more";
+            font-family: 'Material Icons';
+            position: absolute;
+            right: 0.5rem;
+            top: 0;
+            font-size: 2rem;
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+
+        &--label {
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-1rem) scale(1);
+            pointer-events: none;
+            display: block;
+            position: absolute;
+            transition: transform 0.3s;
+        }
+
+        &[data-value]:not([data-value=""]) &--label,
+        #{$c}.open &--label {
+            transform: translateY(-2.25rem) translateX(-25%) scale(0.5);
+        }
+    }
+
+    &.open &--menu {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    &--menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        overflow: auto;
+        transform-origin: center top;
+        transform: scaleY(0);
+        opacity: 0;
+        z-index: 10;
+        letter-spacing: 0.05rem;
+        background-color: $color--dark;
+        color: $color-reset;
+        will-change: opacity, transform;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    &--list {
+        margin: 0;
+        padding: 1.25rem 0;
+    }
+
+    &--item {
+        list-style: none;
+
+        &--label {
+            padding: 0.75rem 1rem;
+        }
+
+        &:hover {
+            background-color: transparentize($color-reset, $amount: 0.92);
+        }
+    }
+}
