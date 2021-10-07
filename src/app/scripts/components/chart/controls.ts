@@ -34,7 +34,7 @@ export function init() {
                 },
                 {
                     label: 'Manufacture',
-                    value: 'manufacture_name'
+                    value: 'manufacturer_name'
                 }
             ]
         }
